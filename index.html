@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Las proteínas y su conformación</title>
+<style>
+:root{--n:#00426A;--g:#FFC500;--c:#8CB3E3;--bg:#f5f8fb;--ink:#12283a}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.65 "Century Gothic","Trebuchet MS",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.w{max-width:860px;margin:0 auto;padding:0 20px}
+header{background:var(--n);color:#fff;padding:44px 0 34px;border-bottom:6px solid var(--g)}
+h1{font-size:clamp(2rem,6vw,3.3rem);line-height:1.08;margin:18px 0 10px}
+header p{margin:0;max-width:60ch;color:#dbe8f3}
+h2{color:var(--n);font-size:1.55rem;margin:2.6rem 0 .5rem}
+p{max-width:70ch}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tabs button{font:inherit;padding:10px 16px;border:2px solid var(--n);background:#fff;color:var(--n);border-radius:8px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--n);color:#fff}
+button:focus-visible,input:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;background:#fff;border-left:6px solid var(--g);padding:20px;border-radius:0 10px 10px 0}
+.panel svg{width:100%;height:auto;background:#eef4fa;border-radius:8px}
+.panel h3{margin:0 0 6px;color:var(--n)}
+.tag{background:var(--n);color:#fff;padding:10px 14px;border-radius:8px;margin-top:10px}
+table{border-collapse:collapse;width:100%;background:#fff}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #d5e1ec;vertical-align:top}
+th{background:var(--n);color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:#fff;padding:16px;border-top:5px solid var(--c);border-radius:8px}
+.card h3{margin:0 0 6px;color:var(--n)}
+.banner{background:var(--n);color:#fff;padding:14px 18px;border-radius:8px;margin-top:16px}
+fieldset{border:1px solid #c9d8e6;background:#fff;border-radius:8px;margin:0 0 14px;padding:12px 16px}
+legend{font-weight:700;color:var(--n);padding:0 6px;max-width:100%}
+fieldset label{display:block;padding:7px 10px;margin:4px 0;border:2px solid transparent;border-radius:6px;cursor:pointer}
+fieldset label:hover{background:#eef4fa}
+.ok{background:#dff3e3!important;border-color:#2e8b57!important}
+.bad{background:#fde3e1!important;border-color:#c0392b!important}
+.why{display:none;margin:6px 0 2px;font-size:.92rem;color:#3d5468}
+.done .why{display:block}
+.q-name{padding:10px;border:2px solid var(--n);border-radius:6px;font:inherit;width:100%;max-width:360px}
+.act{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.act button{font:inherit;font-weight:700;padding:12px 22px;border-radius:8px;border:0;cursor:pointer;background:var(--g);color:var(--n)}
+.act button.s{background:#fff;border:2px solid var(--n);color:var(--n)}
+#res{display:none;background:var(--n);color:#fff;padding:18px 20px;border-radius:10px;border-bottom:5px solid var(--g)}
+#res strong{font-size:1.5rem}
+footer{margin:40px 0 0;background:var(--n);color:#fff;padding:20px 0;border-top:6px solid var(--g)}
+@media(max-width:640px){.panel,.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<div id="chain"></div>
+<h1>Las proteínas y su conformación</h1>
+<p>Una proteína es una cadena de aminoácidos, pero es su forma en el espacio la que le permite trabajar. Aquí recorres los cuatro niveles de estructura y pones a prueba lo aprendido.</p>
+</div></header>
+
+<main class="w">
+<h2>Del aminoácido al polipéptido</h2>
+<p>Cada aminoácido tiene un carbono central unido a un grupo amino (–NH₂), un grupo carboxilo (–COOH), un hidrógeno y una cadena lateral <b>R</b>. Existen 20 aminoácidos comunes y solo cambia el grupo R. El grupo carboxilo de uno reacciona con el amino del siguiente y libera una molécula de agua: así se forma el <b>enlace peptídico</b>. Muchos enlaces peptídicos dan un polipéptido.</p>
+
+<h2>Los cuatro niveles de estructura</h2>
+<p>Selecciona un nivel para ver su descripción y un esquema.</p>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="panel" id="panel" role="tabpanel" aria-live="polite"></div>
+
+<h2>¿Qué mantiene la forma de la proteína?</h2>
+<div style="overflow-x:auto"><table>
+<tr><th>Enlace o interacción</th><th>Se da entre…</th><th>Nivel</th></tr>
+<tr><td>Enlace peptídico (covalente)</td><td>Carboxilo y amino de aminoácidos vecinos</td><td>Primaria</td></tr>
+<tr><td>Puentes de hidrógeno</td><td>Grupos C=O y N–H del esqueleto; también cadenas laterales polares</td><td>Secundaria y terciaria</td></tr>
+<tr><td>Interacciones hidrofóbicas</td><td>Cadenas laterales apolares que se agrupan lejos del agua</td><td>Terciaria</td></tr>
+<tr><td>Interacciones iónicas</td><td>Cadenas laterales con cargas opuestas</td><td>Terciaria</td></tr>
+<tr><td>Puentes disulfuro (–S–S–, covalente)</td><td>Dos cisteínas</td><td>Terciaria y cuaternaria</td></tr>
+</table></div>
+
+<h2>Globulares y fibrosas</h2>
+<div class="two">
+<div class="card"><h3>Globulares</h3>Forma compacta y redondeada, solubles en agua. Trabajan como enzimas, transportadores o anticuerpos. Ejemplos: mioglobina, hemoglobina.</div>
+<div class="card"><h3>Fibrosas</h3>Cadenas alargadas, poco solubles. Dan soporte y resistencia. Ejemplos: colágeno, queratina, fibroína de la seda.</div>
+</div>
+
+<h2>Cuando la forma se pierde</h2>
+<p>La <b>desnaturalización</b> ocurre cuando el calor, un pH extremo, un solvente o las sales de metales pesados rompen las interacciones débiles. La proteína se despliega y pierde su función, pero sus enlaces peptídicos siguen intactos: la estructura primaria se conserva. Freír un huevo es el ejemplo cotidiano. Dentro de la célula, las <b>chaperonas</b> ayudan a que las proteínas se plieguen bien.</p>
+<div class="banner"><b>Idea central:</b> la secuencia de aminoácidos determina el plegamiento, y el plegamiento determina la función.</div>
+
+<h2>Cuestionario</h2>
+<p>20 preguntas de selección múltiple con única respuesta. Cada vez que abres la página, las opciones cambian de lugar.</p>
+<p><label>Nombre del estudiante:<br><input class="q-name" id="nm" type="text" autocomplete="off"></label></p>
+<form id="quiz" onsubmit="return false"></form>
+<div class="act"><button id="go">Calificar</button><button class="s" id="again">Nuevo intento</button></div>
+<div id="res" role="status"></div>
+</main>
+
+<footer><div class="w">Salmo 139:14 — «Maravillosas son tus obras». Como mayordomos del cuerpo y de la creación, cuidamos la vida que se sostiene en moléculas tan precisas.</div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const dots=(n,x0,dx,y,r)=>[...Array(n)].map((_,i)=>`<circle cx="${x0+i*dx}" cy="${y}" r="${r}" fill="${i%2?'#8CB3E3':'#FFC500'}" stroke="#00426A" stroke-width="2"/>`).join('');
+$('chain').innerHTML=`<svg viewBox="0 0 320 34" width="260" aria-hidden="true"><path d="M17 17H303" stroke="#8CB3E3" stroke-width="3"/>${dots(7,17,47.7,17,11)}</svg>`;
+
+const L=[
+{t:'Primaria',d:'Es la secuencia lineal de aminoácidos unidos por enlaces peptídicos. La dicta el orden de nucleótidos del gen. Cambiar un solo aminoácido puede alterar toda la proteína, como en la hemoglobina de la anemia falciforme.',e:'Ejemplo: la insulina y su orden de aminoácidos.',
+s:`<svg viewBox="0 0 320 90" role="img" aria-label="Cadena de aminoácidos en fila"><path d="M30 45H290" stroke="#00426A" stroke-width="4"/>${dots(6,30,52,45,16)}</svg>`},
+{t:'Secundaria',d:'Son plegamientos regulares y locales del esqueleto: la hélice α y la lámina β. Los estabilizan puentes de hidrógeno entre los grupos C=O y N–H del esqueleto.',e:'Ejemplos: queratina (hélice α) y fibroína de la seda (lámina β).',
+s:`<svg viewBox="0 0 300 150" role="img" aria-label="Hélice alfa arriba y lámina beta abajo"><path d="M10 45q20 -50 40 0t40 0t40 0t40 0t40 0t40 0" fill="none" stroke="#00426A" stroke-width="5"/><polyline points="10,120 45,95 80,120 115,95 150,120 185,95 220,120 255,95 290,120" fill="none" stroke="#FFC500" stroke-width="6" stroke-linejoin="round"/></svg>`},
+{t:'Terciaria',d:'Es el plegamiento tridimensional completo de una sola cadena. Lo mantienen las interacciones entre las cadenas laterales R: hidrofóbicas, puentes de hidrógeno, iónicas y puentes disulfuro.',e:'Ejemplo: la mioglobina, una sola cadena plegada.',
+s:`<svg viewBox="0 0 260 150" role="img" aria-label="Cadena plegada formando una masa compacta"><path d="M40 100C20 40 90 10 120 50S200 30 220 80S150 120 120 90S70 130 40 100Z" fill="#8CB3E3" fill-opacity=".45" stroke="#00426A" stroke-width="5"/><path d="M78 58L150 96" stroke="#FFC500" stroke-width="4" stroke-dasharray="5 4"/></svg>`},
+{t:'Cuaternaria',d:'Es la asociación de dos o más cadenas polipeptídicas llamadas subunidades. Las mantienen las mismas interacciones de la terciaria. No todas las proteínas la tienen.',e:'Ejemplos: hemoglobina (4 subunidades) e inmunoglobulina G.',
+s:`<svg viewBox="0 0 260 150" role="img" aria-label="Cuatro subunidades unidas"><g stroke="#00426A" stroke-width="4"><circle cx="100" cy="55" r="36" fill="#FFC500"/><circle cx="160" cy="55" r="36" fill="#8CB3E3"/><circle cx="100" cy="100" r="36" fill="#8CB3E3"/><circle cx="160" cy="100" r="36" fill="#FFC500"/></g></svg>`}];
+const tabs=$('tabs'),panel=$('panel');
+function show(i){[...tabs.children].forEach((b,k)=>b.setAttribute('aria-selected',k==i));const o=L[i];panel.innerHTML=`<div><h3>Estructura ${o.t.toLowerCase()}</h3><p>${o.d}</p><div class="tag">${o.e}</div></div>${o.s}`}
+L.forEach((o,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+o.t;b.setAttribute('role','tab');b.onclick=()=>show(i);tabs.appendChild(b)});
+show(0);
+
+// [pregunta, CORRECTA, distractor, distractor, distractor, explicación]
+const Q=[
+["¿Cuál es la unidad básica (monómero) que forma las proteínas?","Los aminoácidos","Los nucleótidos","Los monosacáridos","Los ácidos grasos","Las proteínas son polímeros de aminoácidos; los nucleótidos forman los ácidos nucleicos."],
+["El enlace que une dos aminoácidos consecutivos se llama:","Enlace peptídico","Enlace glucosídico","Enlace éster","Puente de hidrógeno","Se forma entre el carboxilo de un aminoácido y el amino del siguiente, con liberación de agua."],
+["¿Qué parte del aminoácido cambia de uno a otro y le da propiedades particulares?","La cadena lateral (grupo R)","El grupo amino","El grupo carboxilo","El hidrógeno unido al carbono central","Todos comparten amino, carboxilo e hidrógeno; solo el grupo R es distinto."],
+["¿Cuántos aminoácidos diferentes forman comúnmente las proteínas de los seres vivos?","20","4","8","64","Con 20 aminoácidos se construye toda la variedad de proteínas."],
+["La estructura primaria de una proteína corresponde a:","La secuencia lineal de aminoácidos","El plegamiento en hélice α","La forma tridimensional completa","La unión de varias cadenas","Es el orden de los aminoácidos en la cadena polipeptídica."],
+["La secuencia de aminoácidos de una proteína está determinada por:","La secuencia de nucleótidos del gen (ADN)","La temperatura de la célula","El pH del medio","La cantidad de agua presente","El gen codifica el orden exacto de los aminoácidos."],
+["La hélice α y la lámina β son ejemplos de estructura:","Secundaria","Primaria","Terciaria","Cuaternaria","Son plegamientos regulares y locales del esqueleto de la cadena."],
+["¿Qué interacciones estabilizan principalmente la estructura secundaria?","Puentes de hidrógeno entre los grupos C=O y N–H del esqueleto","Puentes disulfuro entre cisteínas","Nuevos enlaces peptídicos","La atracción entre iones de la solución","Los puentes de hidrógeno regulares mantienen la hélice o la lámina."],
+["La fibroína de la seda es resistente y flexible porque sus cadenas forman principalmente:","Láminas β plegadas","Hélices α aisladas","Subunidades globulares","Una sola cadena sin plegar","Las cadenas extendidas dispuestas en láminas β le dan su resistencia."],
+["La estructura terciaria es:","El plegamiento tridimensional de una sola cadena polipeptídica","La sucesión de aminoácidos","La asociación de varias cadenas","Solo la hélice α","Resulta de las interacciones entre las cadenas laterales R de esa cadena."],
+["Un puente disulfuro (–S–S–) se forma entre las cadenas laterales de dos:","Cisteínas","Glicinas","Alaninas","Lisinas","Solo la cisteína tiene un grupo –SH capaz de formar este enlace covalente."],
+["En una proteína globular en medio acuoso, los aminoácidos con cadenas laterales apolares tienden a:","Agruparse en el interior, lejos del agua","Ubicarse en la superficie","Romper los enlaces peptídicos","Adquirir carga positiva","Es el efecto hidrofóbico, una fuerza clave de la estructura terciaria."],
+["La estructura cuaternaria aparece cuando:","Dos o más cadenas polipeptídicas se asocian","Una cadena se pliega sobre sí misma","Se rompe el enlace peptídico","Los aminoácidos se ordenan en secuencia","Cada cadena se llama subunidad; no todas las proteínas la tienen."],
+["¿Cuál de estas proteínas alcanza como máximo la estructura terciaria?","Mioglobina","Hemoglobina","Inmunoglobulina G (anticuerpo)","Colágeno","La mioglobina tiene una sola cadena; las otras constan de varias cadenas."],
+["Cuando una proteína se desnaturaliza:","Pierde su forma tridimensional pero conserva su secuencia de aminoácidos","Se rompen todos sus enlaces peptídicos","Cambia el orden de sus aminoácidos","Se convierte en carbohidrato","Se alteran las estructuras secundaria, terciaria y cuaternaria; la primaria permanece."],
+["La clara de huevo pasa de transparente a blanca al freírse porque la albúmina:","Se desnaturaliza por el calor y coagula","Se convierte en grasa","Duplica sus aminoácidos","Se une a la cáscara","El calor rompe interacciones débiles y la proteína pierde su forma nativa."],
+["¿Cuál de estos factores NO suele desnaturalizar una proteína?","La temperatura corporal normal (37 °C)","El calor extremo","Un pH muy ácido o muy básico","Las sales de metales pesados","A 37 °C las proteínas humanas mantienen su conformación nativa."],
+["Comparadas con las proteínas fibrosas, las globulares suelen ser:","Solubles en agua y con funciones dinámicas (enzimas, transporte)","Alargadas e insolubles, con función estructural","Formadas solo por hélice α","Incapaces de plegarse","Las fibrosas (colágeno, queratina) dan soporte; las globulares actúan como enzimas o transportadores."],
+["Las chaperonas son proteínas que:","Ayudan a otras proteínas a plegarse correctamente","Cortan los enlaces peptídicos","Transportan oxígeno en la sangre","Almacenan la información genética","Evitan plegamientos incorrectos dentro de la célula."],
+["En la anemia falciforme, el cambio de un solo aminoácido en la hemoglobina demuestra que:","La secuencia primaria determina la conformación y la función","La estructura primaria no influye en la función","Solo importa la estructura cuaternaria","Las proteínas no dependen de los genes","Un aminoácido distinto altera el plegamiento y, con él, el funcionamiento de la proteína."]
+];
+
+// Reparto equilibrado: la correcta cae 5 veces en cada letra, en orden aleatorio
+function build(){
+  const pos=shuffle([0,1,2,3].flatMap(p=>Array(5).fill(p)));
+  const f=$('quiz');f.className='';f.innerHTML='';$('res').style.display='none';
+  Q.forEach((q,i)=>{
+    const w=shuffle(q.slice(2,5));let k=0;
+    q.ans=pos[i];q.opts=[0,1,2,3].map(p=>p===pos[i]?q[1]:w[k++]);
+    const fs=document.createElement('fieldset');
+    fs.innerHTML=`<legend>${i+1}. ${q[0]}</legend>`+q.opts.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${'ABCD'[j]}) ${o}</label>`).join('')+`<div class="why"></div>`;
+    f.appendChild(fs);
+  });
+}
+build();
+
+$('go').onclick=()=>{
+  let ok=0,blank=0;
+  Q.forEach((q,i)=>{
+    const fs=$('quiz').children[i],sel=fs.querySelector('input:checked');
+    fs.querySelectorAll('label').forEach((l,j)=>{l.classList.remove('ok','bad');if(j===q.ans)l.classList.add('ok');else if(sel&&+sel.value===j)l.classList.add('bad')});
+    if(!sel)blank++;else if(+sel.value===q.ans)ok++;
+    fs.querySelector('.why').textContent=(sel&&+sel.value===q.ans?'Correcto. ':'Respuesta correcta: '+'ABCD'[q.ans]+'. ')+q[5];
+  });
+  $('quiz').className='done';
+  const n=(ok/20*5).toFixed(1),lv=n>=4.6?'Superior':n>=4?'Alto':n>=3?'Básico':'Bajo',nm=$('nm').value.trim();
+  const r=$('res');r.style.display='block';
+  r.innerHTML=`${nm?nm+' — ':''}<strong>${ok} de 20</strong> correctas · Nota <strong>${n}</strong> / 5.0 · Desempeño <strong>${lv}</strong>${blank?`<br>Dejaste ${blank} sin responder.`:''}`;
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+};
+$('again').onclick=()=>{build();$('nm').value='';window.scrollTo({top:$('quiz').offsetTop-80,behavior:'smooth'})};
+</script>
+</body>
+</html>
